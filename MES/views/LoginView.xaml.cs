@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using MES.viewModels;
+using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MES.views
 {
@@ -23,6 +12,37 @@ namespace MES.views
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        #region 事件处理
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            if (this.DataContext is LoginViewModel vm)
+            {
+                vm.TurnToMainCommand.Execute(vm);
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckLoginEnable();
+        }
+        #endregion
+
+        private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (sender is PasswordBox box)
+            {
+                CheckLoginEnable(box.Password);
+            }
+        }
+
+        private void CheckLoginEnable(string password = "")
+        {
+            if (this.DataContext is LoginViewModel vm)
+            {
+                vm.CheckInputCommand.Execute(password);
+            }
         }
     }
 }

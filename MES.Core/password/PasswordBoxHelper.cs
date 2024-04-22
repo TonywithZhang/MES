@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,6 @@ namespace MES.Core.password
 {
     public static class PasswordBoxHelper
     {
-
-
-
-
         public static string GetPassword(DependencyObject obj)
         {
             return (string)obj.GetValue(PasswordProperty);

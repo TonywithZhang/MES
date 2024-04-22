@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using MES.message;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +17,20 @@ namespace MES.viewModels
         public MainViewModel()
         {
             this.Page = App.Current.Services.GetService<LoginView>();
+            AcceptMessage();
         }
         #endregion
 
+        #region 私有函数
+        private void AcceptMessage()
+        {
+            WeakReferenceMessenger
+                .Default
+                .Register<LoginSuccessMessage>(this,
+                    (_, _) => 
+                    Page = App.Current.Services.GetService<WorkView>()
+                );
+        }
+        #endregion
     }
 }

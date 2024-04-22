@@ -5,8 +5,67 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MES.views"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:pass="clr-namespace:MES.Core.behavior;assembly=MES.Core"
+             xmlns:helper="clr-namespace:MES.Core.password;assembly=MES.Core"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Storyboard Completed="Storyboard_Completed" x:Key="TranslateOut">
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" To="-1000" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Style TargetType="Image" x:Key="ImageTranslateOutStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsLoginSuccess}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource TranslateOut}"/>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Grid" x:Key="GridTranslateOutStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsLoginSuccess}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" To="500" Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="{Binding Title}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Style="{StaticResource ImageTranslateOutStyle}" Source="{StaticResource ChartsDrawingImage}" Stretch="Fill">
+            <Image.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Image.RenderTransform>
+        </Image>
+        <Grid Grid.Column="1" Style="{StaticResource GridTranslateOutStyle}">
+            <Grid.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="MES系统" FontSize="32" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+            <TextBox Grid.Row="1" Margin="50,10" VerticalAlignment="Center" md:HintAssist.Hint="请输入用户名" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
+            <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="2" Margin="50,10" VerticalAlignment="Center" helper:PasswordBoxHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" md:HintAssist.Hint="请输入密码" Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                <i:Interaction.Behaviors>
+                    <pass:PasswordBoxBehavior />
+                </i:Interaction.Behaviors>
+            </PasswordBox>
+            <Button Grid.Row="3" Margin="50,10" md:ButtonProgressAssist.IsIndeterminate="True" md:ButtonProgressAssist.IsIndicatorVisible="{Binding ShowIndicator}" Command="{Binding LoginCommand}" Content="{Binding ButtonContent}" IsEnabled="{Binding ButtonEnable}"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,10 +1,49 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using MES.message;
+using System.Diagnostics;
 
 namespace MES.viewModels
 {
     internal partial class LoginViewModel : ObservableObject
     {
+        #region 属性
         [ObservableProperty]
-        private string title = "hello world";
+        private bool isLoginSuccess = false;
+        [ObservableProperty]
+        private string userName = string.Empty;
+        [ObservableProperty]
+        private string password = string.Empty;
+        
+        [ObservableProperty]
+        private bool showIndicator = false;
+        [ObservableProperty]
+        private string buttonContent = "点击登录";
+        [ObservableProperty]
+        private bool buttonEnable = false;
+        #endregion
+
+        #region 命令
+        [RelayCommand]
+        private void TurnToMain()
+        {
+            WeakReferenceMessenger
+                .Default
+                .Send<LoginSuccessMessage>(new LoginSuccessMessage(string.Empty));
+        }
+        [RelayCommand]
+        private void CheckInput(string pass)
+        {
+            ButtonEnable = !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(pass));
+        }
+
+        [RelayCommand]
+        private async Task Login()
+        {
+            await Task.Delay(1000);
+            IsLoginSuccess = true;
+        }
+        #endregion
     }
 }

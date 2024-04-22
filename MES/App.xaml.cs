@@ -39,6 +39,9 @@ namespace MES
 
             services.AddSingleton<LoginViewModel>();
             services.AddTransient<LoginView>(sp => new LoginView { DataContext = sp.GetService<LoginViewModel>() });
+
+            services.AddSingleton<WorkViewModel>();
+            services.AddTransient<WorkView>(sp => new WorkView { DataContext=sp.GetService<WorkViewModel>() });
             #endregion
 
 
