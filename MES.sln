@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MES", "MES\MES.csproj", "{77A57489-AEE9-410C-8DC9-4E73C61C6A9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MES", "MES\MES.csproj", "{77A57489-AEE9-410C-8DC9-4E73C61C6A9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MES.Core", "MES.Core\MES.Core.csproj", "{EED6CEA6-25E3-4DB3-B5BB-268CCFA01291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MES.Core", "MES.Core\MES.Core.csproj", "{EED6CEA6-25E3-4DB3-B5BB-268CCFA01291}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MES.Backend", "MES.Backend\MES.Backend.csproj", "{B57CD973-8876-4247-883C-AF417EC4A00B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MES.DataTransaction", "MES.DataTransaction\MES.DataTransaction.csproj", "{026F44D0-912A-4A4A-9B5E-951FE8676920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EED6CEA6-25E3-4DB3-B5BB-268CCFA01291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EED6CEA6-25E3-4DB3-B5BB-268CCFA01291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EED6CEA6-25E3-4DB3-B5BB-268CCFA01291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B57CD973-8876-4247-883C-AF417EC4A00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B57CD973-8876-4247-883C-AF417EC4A00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B57CD973-8876-4247-883C-AF417EC4A00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B57CD973-8876-4247-883C-AF417EC4A00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{026F44D0-912A-4A4A-9B5E-951FE8676920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{026F44D0-912A-4A4A-9B5E-951FE8676920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{026F44D0-912A-4A4A-9B5E-951FE8676920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{026F44D0-912A-4A4A-9B5E-951FE8676920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
