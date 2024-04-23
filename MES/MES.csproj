@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MES.Core\MES.Core.csproj" />
+    <ProjectReference Include="..\MES.DataTransaction\MES.DataTransaction.csproj" />
+    <ProjectReference Include="..\MES.Models\MES.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

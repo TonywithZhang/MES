@@ -9,7 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MES.Core;component/resource/ImageResource.xaml" />
-
+                <ResourceDictionary Source="pack://application:,,,/MES.Core;component/resource/ConverterResource.xaml" />
                 <md:BundledTheme
                     BaseTheme="Light"
                     PrimaryColor="DeepOrange"
