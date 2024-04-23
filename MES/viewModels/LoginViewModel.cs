@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using MES.DataTransaction.database;
 using MES.message;
+using MES.Models.table;
 using System.Diagnostics;
 
 namespace MES.viewModels
@@ -41,8 +43,13 @@ namespace MES.viewModels
         [RelayCommand]
         private async Task Login()
         {
+            ShowIndicator = true;
             await Task.Delay(1000);
-            IsLoginSuccess = true;
+            if (await UserService.GetUserByName(UserName) is UserModel model && model.Password == Password)
+            {
+                IsLoginSuccess = true;
+            }
+            ShowIndicator = false;
         }
         #endregion
     }

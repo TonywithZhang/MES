@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using MES.DataTransaction.database;
 using MES.message;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;

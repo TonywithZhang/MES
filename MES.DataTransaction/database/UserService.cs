@@ -20,6 +20,18 @@ namespace MES.DataTransaction.database
                 return null;
             }
         }
+        public static async Task<bool> InsertUser(UserModel model)
+        {
+            try
+            {
+                return await sql.Insert(model).ExecuteAffrowsAsync() != 0;
+            }
+            catch (Exception)
+            {
+
+            }
+            return false;
+        }
         #endregion
     }
 }
