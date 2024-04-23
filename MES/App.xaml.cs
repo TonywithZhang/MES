@@ -1,4 +1,5 @@
-﻿using MES.viewModels;
+﻿using MES.model;
+using MES.viewModels;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -42,6 +43,9 @@ namespace MES
 
             services.AddSingleton<WorkViewModel>();
             services.AddTransient<WorkView>(sp => new WorkView { DataContext=sp.GetService<WorkViewModel>() });
+
+            services.AddSingleton<ProductionViewModel>();
+            services.AddTransient<ProductionPage>(sp => new ProductionPage { DataContext = sp.GetService<ProductionViewModel>() });
             #endregion
 
 

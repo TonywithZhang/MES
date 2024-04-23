@@ -28,13 +28,14 @@
                 ItemsSource="{Binding Icons}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Background="Transparent" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" ToolTip="{Binding Desc}">
                             <Grid.Style>
                                 <Style TargetType="Grid">
+                                    <Setter Property="Background" Value="Transparent"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsActive}" Value="True">
                                             <DataTrigger.Setters>
-                                                <Setter Property="Background" Value="LightGray"/>
+                                                <Setter Property="Background" Value="DarkGray"/>
                                             </DataTrigger.Setters>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -86,7 +87,7 @@
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsActive}" Value="True">
                                                     <DataTrigger.Setters>
-                                                        <Setter Property="Foreground" Value="#d4237a"/>
+                                                        <Setter Property="Foreground" Value="White"/>
                                                     </DataTrigger.Setters>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -99,5 +100,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
+        <ContentControl Grid.Column="1" Content="{Binding Page}"/>
     </Grid>
 </UserControl>

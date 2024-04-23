@@ -31,7 +31,7 @@ namespace MES.views
         {
             if (DataContext is WorkViewModel vm && sender is Grid g && g.DataContext is IconModel icon)
             {
-                
+                vm.SwitchPageCommand.Execute(icon.IconKind);
             }
         }
     }

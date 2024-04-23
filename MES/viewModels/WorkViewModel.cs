@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MES.model;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
 namespace MES.viewModels
@@ -19,18 +20,35 @@ namespace MES.viewModels
         private object? page;
         #endregion
 
+        #region 私有字段
+        private readonly IServiceProvider services = App.Current.Services;
+        #endregion
+
         #region 构造函数
         public WorkViewModel()
         {
-            
+            Page = services.GetService<ProductionPage>();
         }
         #endregion
 
         #region 私有函数
         [RelayCommand]
-        private void SwitchPage(string page)
+        private void SwitchPage(string _page)
         {
-
+            Page = _page switch
+            {
+                "BagSuitcase"    => services.GetService<ProductionPage>(),
+                "Cached"         => services.GetService<ProductionPage>(),
+                "Cog"            => services.GetService<ProductionPage>(),
+                "Devices"        => services.GetService<ProductionPage>(),
+                "ChartBellCurve" => services.GetService<ProductionPage>(),
+                _                => services.GetService<ProductionPage>(),
+            };
+            foreach (var item in Icons)
+            {
+                item.IsActive = false;
+            }
+            Icons.First(c => c.IconKind == _page).IsActive = true;
         }
         #endregion
     }
