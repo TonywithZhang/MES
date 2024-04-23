@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FreeSql" Version="3.2.821" />
+    <PackageReference Include="FreeSql.Provider.Sqlite" Version="3.2.821" />
+  </ItemGroup>
+
 </Project>
