@@ -2,6 +2,7 @@
 using System.Windows.Shapes;
 using System;
 using System.Windows;
+using MES.DataTransaction.database;
 
 namespace MES.viewModels
 {
@@ -31,6 +32,7 @@ namespace MES.viewModels
             {
                 while (true)
                 {
+                    await InsertQuality();
                     await app.Dispatcher.BeginInvoke(() =>
                     {
                         ClearLists();
@@ -60,6 +62,20 @@ namespace MES.viewModels
             Parts = count.Select(c => new Point(COUNT - c, (int)(random.NextDouble() * 20) + 50)).ToList();
             Lines = count.Select(c => new Point(COUNT - c, (int)(random.NextDouble() * 10) + 80)).ToList();
             Solders = count.Select(c => new Point(COUNT - c, (int)(random.NextDouble() * 30) + 10)).ToList();
+        }
+
+        private async Task InsertQuality()
+        {
+            await QualityService.InsertQualityModel(
+                new Models.table.QualityModel()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    BadReason = "公差太大",
+                    Name = "车门饰条",
+                    Batch = "SF2491930103",
+                    ProductNo = "ASD123123",
+                    UpdateTime = DateTime.Now
+                });
         }
 
         #endregion
