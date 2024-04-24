@@ -101,15 +101,15 @@ namespace MES.Core.widget
 
 
 
-        public List<string> Time
+        public IEnumerable<string> Time
         {
-            get { return (List<string>)GetValue(TimeProperty); }
+            get { return (IEnumerable<string>)GetValue(TimeProperty); }
             set { SetValue(TimeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.Register("Time", typeof(List<string>), typeof(LineChart), new PropertyMetadata(new List<string>()));
+            DependencyProperty.Register("Time", typeof(IEnumerable<string>), typeof(LineChart), new PropertyMetadata(new List<string>()));
 
 
 
@@ -256,14 +256,14 @@ namespace MES.Core.widget
                 context.DrawGeometry(brush, null, geo);
                 #endregion
                 #region 绘制横坐标
-                if (Time != null && Time.Count == count)
+                if (Time != null && Time.Count() == count)
                 {
-                    var labelCount = Time.Count > 8 ? 8 : Time.Count;
-                    var indexes = Enumerable.Range(1, labelCount - 1).Select(d => Time.Count / labelCount * d);
-                    var labels = indexes.Select(d => Time[d]).ToArray();
+                    var labelCount = Time.Count() > 8 ? 8 : Time.Count();
+                    var indexes = Enumerable.Range(1, labelCount - 1).Select(d => Time.Count() / labelCount * d);
+                    var labels = indexes.Select(d => Time.ElementAt(d)).ToArray();
                     var labelPositions = Enumerable.Range(1, labelCount - 1).Select(d => new PointD
                     {
-                        X = ActualWidth / labelCount,
+                        X = ActualWidth / labelCount * d,
                         Y = ActualHeight - 15
                     }).ToArray();
                     for (var i = 0; i < labelPositions.Length; i++)
@@ -346,7 +346,7 @@ namespace MES.Core.widget
             {
                 var range = Points.Skip(downIndex).Take(displayCount).ToList();
                 var point = range[(int)(range.Count * ratio)];
-                var time = Time[(int)(range.Count * ratio)];
+                var time = Time.ElementAt((int)(range.Count * ratio));
                 var xPosition = p.X;
                 var yPosition = YCoordination(ActualHeight, point.Y, maxValue);
                 var showPoint = new PointD(xPosition, yPosition);
