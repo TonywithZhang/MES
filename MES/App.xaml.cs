@@ -45,6 +45,19 @@ namespace MES
 
             services.AddSingleton<ProductionViewModel>();
             services.AddTransient<ProductionPage>(sp => new ProductionPage { DataContext = sp.GetService<ProductionViewModel>() });
+
+            services.AddSingleton<ProcessPageViewModel>();
+            services.AddTransient<ProcessPage>(sp => new ProcessPage { DataContext = sp.GetService<ProcessPageViewModel>()});
+
+            services.AddSingleton<QualityPageViewModel>();
+            services.AddTransient<QualityPage>(sp => new QualityPage { DataContext = sp.GetService<QualityPageViewModel>() });
+
+            services.AddSingleton<DevicePageViewModel>();
+            services.AddTransient<DevicePage>(sp => new DevicePage { DataContext = sp.GetService<DevicePageViewModel>() });
+
+            services.AddSingleton<ChartPageViewModel>();
+            services.AddTransient<ChartPage>(sp => new ChartPage { DataContext = sp.GetService<ChartPageViewModel>() });
+
             #endregion
 
 
