@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MES.model;
+using MES.views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 

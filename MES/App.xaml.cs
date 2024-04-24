@@ -1,5 +1,4 @@
-﻿using MES.model;
-using MES.viewModels;
+﻿using MES.viewModels;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
