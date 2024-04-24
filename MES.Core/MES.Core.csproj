@@ -12,4 +12,8 @@
     <PackageReference Include="ValueConverters" Version="3.0.26" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
 </Project>

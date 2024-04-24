@@ -67,9 +67,6 @@ namespace MES.DataTransaction.bean
 
         public static TaskModel RandomDispatcher()
         {
-            var name = RandomName();
-            var no = RandomEmployeeNo();
-
             return new TaskModel { EmployeeNo = RandomEmployeeNo(), Id = Guid.NewGuid().ToString(), Name = RandomName(), TaskName = RandomTitle(), Time = DateTime.Now };
         }
 
