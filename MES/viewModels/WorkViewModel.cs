@@ -39,10 +39,10 @@ namespace MES.viewModels
             Page = _page switch
             {
                 "BagSuitcase"    => services.GetService<ProductionPage>(),
-                "Cached"         => services.GetService<ProductionPage>(),
-                "Cog"            => services.GetService<ProductionPage>(),
-                "Devices"        => services.GetService<ProductionPage>(),
-                "ChartBellCurve" => services.GetService<ProductionPage>(),
+                "Cached"         => services.GetService<ProcessPage>(),
+                "Cog"            => services.GetService<QualityPage>(),
+                "Devices"        => services.GetService<DevicePage>(),
+                "ChartBellCurve" => services.GetService<ChartPage>(),
                 _                => services.GetService<ProductionPage>(),
             };
             foreach (var item in Icons)
