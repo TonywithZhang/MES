@@ -65,7 +65,7 @@ namespace MES.DataTransaction.database
             return false;
         }
 
-        public static async Task<IEnumerable<TaskModel>> GetTasks()
+        public static async Task<IList<TaskModel>> GetTasks()
         {
             try
             {

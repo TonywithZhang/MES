@@ -5,4 +5,5 @@
     xmlns:local="clr-namespace:MES.Core.converter">
     <converter:DateTimeToStringConverter x:Key="DateTime2StringConverter" />
     <local:Point2SystemPointConverter x:Key="PointsConverter" />
+    <local:String2ResourceConverter x:Key="String2ResourceConverter"/>
 </ResourceDictionary>

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using MES.model;
+using MES.Models.table;
+using MES.viewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +27,14 @@ namespace MES.views
         public ChartPage()
         {
             InitializeComponent();
+        }
+
+        private void Card_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Card c && c.DataContext is ChartModel m && DataContext is ChartPageViewModel vm)
+            {
+                vm.ExportTableCommand.Execute(m.Content);
+            }
         }
     }
 }
