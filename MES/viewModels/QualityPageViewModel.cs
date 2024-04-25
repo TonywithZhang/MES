@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows.Shapes;
-using System;
-using System.Windows;
 using MES.DataTransaction.database;
+using System.Windows;
 
 namespace MES.viewModels
 {

@@ -342,7 +342,7 @@ namespace MES.Core.widget
             var visual = new DrawingVisual();
             using var context = visual.RenderOpen();
             var ratio = p.X / ActualWidth;
-            if (ratio > 0 && ratio < 1)
+            if (ratio > 0 && ratio < 1 && maxValue != 0)
             {
                 var range = Points.Skip(downIndex).Take(displayCount).ToList();
                 var point = range[(int)(range.Count * ratio)];

@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MES.DataTransaction.database;
 using MES.model;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MES.viewModels
 {
@@ -29,6 +31,10 @@ namespace MES.viewModels
         public WorkViewModel()
         {
             Page = services.GetService<ProductionPage>();
+            Task.Run(async () =>
+            {
+                Trace.WriteLine($"设备数量是：{(await DeviceService.GetDevices()).Count()}");
+            });
         }
         #endregion
 
