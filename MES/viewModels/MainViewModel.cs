@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using MES.DataTransaction.database;
+using MES.DataTransaction.socket;
 using MES.message;
 using MES.views;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 
 namespace MES.viewModels
 {
@@ -19,6 +21,7 @@ namespace MES.viewModels
         {
             this.Page = App.Current.Services.GetService<LoginView>();
             AcceptMessage();
+            StartWebSocket();
         }
         #endregion
 
@@ -31,6 +34,18 @@ namespace MES.viewModels
                     (_, _) => 
                     Page = App.Current.Services.GetService<WorkView>()
                 );
+        }
+
+        private void StartWebSocket()
+        {
+            try
+            {
+                WebSocketService.ConfigureWebSocket();
+            }
+            catch (Exception)
+            {
+                Trace.WriteLine("websocket start failed");
+            }
         }
         #endregion
     }

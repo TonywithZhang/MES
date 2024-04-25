@@ -13,6 +13,7 @@ namespace MES.viewModels
         private readonly App app = App.Current;
         private readonly Dictionary<string, int> records = [];
         #endregion
+
         #region 属性
         [ObservableProperty]
         private IEnumerable<DeviceDisplayModel> devices = [];
