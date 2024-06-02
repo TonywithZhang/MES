@@ -1,8 +1,10 @@
-﻿using MES.viewModels;
+﻿using System.Windows;
+using MES.viewModels;
+using MES.viewModels.Manage;
 using MES.views;
+using MES.views.Manage;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System.Windows;
 
 namespace MES
 {
@@ -32,32 +34,66 @@ namespace MES
             var services = new ServiceCollection();
 
             #region 注册对象
-            services.AddSingleton<ILogger>(_ => new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File("log.txt").CreateLogger());
+            services.AddSingleton<ILogger>(_ =>
+                new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+                    .WriteTo.File("log.txt")
+                    .CreateLogger()
+            );
 
             services.AddSingleton<MainViewModel>();
-            services.AddTransient<MainWindow>(sp => new MainWindow { DataContext = sp.GetService<MainViewModel>() });
+            services.AddTransient<MainWindow>(sp => new MainWindow
+            {
+                DataContext = sp.GetService<MainViewModel>()
+            });
 
             services.AddSingleton<LoginViewModel>();
-            services.AddTransient<LoginView>(sp => new LoginView { DataContext = sp.GetService<LoginViewModel>() });
+            services.AddTransient<LoginView>(sp => new LoginView
+            {
+                DataContext = sp.GetService<LoginViewModel>()
+            });
 
             services.AddSingleton<WorkViewModel>();
-            services.AddTransient<WorkView>(sp => new WorkView { DataContext=sp.GetService<WorkViewModel>() });
+            services.AddTransient<WorkView>(sp => new WorkView
+            {
+                DataContext = sp.GetService<WorkViewModel>()
+            });
 
             services.AddSingleton<ProductionViewModel>();
-            services.AddTransient<ProductionPage>(sp => new ProductionPage { DataContext = sp.GetService<ProductionViewModel>() });
+            services.AddTransient<ProductionPage>(sp => new ProductionPage
+            {
+                DataContext = sp.GetService<ProductionViewModel>()
+            });
 
             services.AddSingleton<ProcessPageViewModel>();
-            services.AddTransient<ProcessPage>(sp => new ProcessPage { DataContext = sp.GetService<ProcessPageViewModel>()});
+            services.AddTransient<ProcessPage>(sp => new ProcessPage
+            {
+                DataContext = sp.GetService<ProcessPageViewModel>()
+            });
 
             services.AddSingleton<QualityPageViewModel>();
-            services.AddTransient<QualityPage>(sp => new QualityPage { DataContext = sp.GetService<QualityPageViewModel>() });
+            services.AddTransient<QualityPage>(sp => new QualityPage
+            {
+                DataContext = sp.GetService<QualityPageViewModel>()
+            });
 
             services.AddSingleton<DevicePageViewModel>();
-            services.AddTransient<DevicePage>(sp => new DevicePage { DataContext = sp.GetService<DevicePageViewModel>() });
+            services.AddTransient<DevicePage>(sp => new DevicePage
+            {
+                DataContext = sp.GetService<DevicePageViewModel>()
+            });
 
             services.AddSingleton<ChartPageViewModel>();
-            services.AddTransient<ChartPage>(sp => new ChartPage { DataContext = sp.GetService<ChartPageViewModel>() });
+            services.AddTransient<ChartPage>(sp => new ChartPage
+            {
+                DataContext = sp.GetService<ChartPageViewModel>()
+            });
 
+            services.AddSingleton<AddProjectViewModel>();
+            services.AddTransient<AddProductionPage>(sp => new AddProductionPage
+            {
+                DataContext = sp.GetService<AddProjectViewModel>()
+            });
             #endregion
 
 
@@ -74,5 +110,4 @@ namespace MES
         }
         #endregion
     }
-
 }

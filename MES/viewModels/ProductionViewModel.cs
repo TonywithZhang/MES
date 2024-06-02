@@ -1,10 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MES.DataTransaction.bean;
 using MES.DataTransaction.database;
+using MES.message;
 using MES.Models.project;
 using MES.Models.table;
-using System.Collections.ObjectModel;
+using MES.views.Manage;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MES.viewModels
 {
@@ -22,19 +26,27 @@ namespace MES.viewModels
         #region 构造函数
         public ProductionViewModel()
         {
-            new Action(async () => { (await ProjectService.GetProjects()).ForEach(p => Projects.Add(p));ProjectCount = Projects.Count().ToString(); }).Invoke();
-            new Action(async() => (await ProjectService.GetTasks()).ToList().ForEach(t => DispatcherInfos.Add(new DispatcherModel(t.Name, t.Time)))).Invoke();
+            InitializeMessenger();
+            new Action(async () =>
+            {
+                (await ProjectService.GetProjects()).ForEach(p => Projects.Add(p));
+                ProjectCount = Projects.Count().ToString();
+            }).Invoke();
+            new Action(
+                async () =>
+                    (await ProjectService.GetTasks())
+                        .ToList()
+                        .ForEach(t => DispatcherInfos.Add(new DispatcherModel(t.Name, t.Time)))
+            ).Invoke();
         }
         #endregion
 
         #region 私有方法
         [RelayCommand]
-        private async Task AddProject()
+        private void AddProject()
         {
-            var model = RandomModelAssembler.randomProjectModel();
-            await ProjectService.InsertProject(model);
-            Projects.Insert(0,model);
-            ProjectCount = Projects.Count().ToString();
+            var page = App.Current.Services.GetService<AddProductionPage>();
+            page!.Show();
         }
 
         [RelayCommand]
@@ -42,13 +54,29 @@ namespace MES.viewModels
         {
             var model = RandomModelAssembler.RandomDispatcher();
             await ProjectService.InsertTask(model);
-            DispatcherInfos.Insert(0, new DispatcherModel($"将{model.TaskName}分配给{model.Name}生产",model.Time));
+            DispatcherInfos.Insert(
+                0,
+                new DispatcherModel($"将{model.TaskName}分配给{model.Name}生产", model.Time)
+            );
         }
 
         [RelayCommand]
         private void AddMonitor()
         {
             MonitorInfos.Insert(0, RandomModelAssembler.RandomMonitorModel());
+        }
+
+        private void InitializeMessenger()
+        {
+            WeakReferenceMessenger.Default.Register<AddProjectMessage>(
+                this,
+                async (_, m) =>
+                {
+                    await ProjectService.InsertProject(m.Project!);
+                    Projects.Insert(0, m.Project!);
+                    ProjectCount = Projects.Count.ToString();
+                }
+            );
         }
         #endregion
     }

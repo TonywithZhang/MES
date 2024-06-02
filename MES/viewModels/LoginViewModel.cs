@@ -49,6 +49,7 @@ namespace MES.viewModels
             {
                 IsLoginSuccess = true;
             }
+            IsLoginSuccess = true;
             ShowIndicator = false;
         }
         #endregion
