@@ -94,6 +94,12 @@ namespace MES
             {
                 DataContext = sp.GetService<AddProjectViewModel>()
             });
+
+            services.AddSingleton<DispatchProjectViewModel>();
+            services.AddTransient<DispatchProjectPage>(sp => new DispatchProjectPage
+            {
+                DataContext = sp.GetService<DispatchProjectViewModel>()
+            });
             #endregion
 
 

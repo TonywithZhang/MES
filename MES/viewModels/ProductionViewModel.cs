@@ -30,7 +30,7 @@ namespace MES.viewModels
             new Action(async () =>
             {
                 (await ProjectService.GetProjects()).ForEach(p => Projects.Add(p));
-                ProjectCount = Projects.Count().ToString();
+                ProjectCount = Projects.Count.ToString();
             }).Invoke();
             new Action(
                 async () =>
@@ -50,14 +50,10 @@ namespace MES.viewModels
         }
 
         [RelayCommand]
-        private async Task AddDispatcher()
+        private void AddDispatcher()
         {
-            var model = RandomModelAssembler.RandomDispatcher();
-            await ProjectService.InsertTask(model);
-            DispatcherInfos.Insert(
-                0,
-                new DispatcherModel($"将{model.TaskName}分配给{model.Name}生产", model.Time)
-            );
+            var page = App.Current.Services.GetService<DispatchProjectPage>();
+            page!.Show();
         }
 
         [RelayCommand]
@@ -75,6 +71,17 @@ namespace MES.viewModels
                     await ProjectService.InsertProject(m.Project!);
                     Projects.Insert(0, m.Project!);
                     ProjectCount = Projects.Count.ToString();
+                }
+            );
+            WeakReferenceMessenger.Default.Register<AddDispatcherMessage>(
+                this,
+                async (_, m) =>
+                {
+                    await ProjectService.InsertTask(m.Task!);
+                    DispatcherInfos.Insert(
+                        0,
+                        new DispatcherModel($"将{m.Task!.TaskName}分配给{m.Task!.Name}生产", m.Task!.Time)
+                    );
                 }
             );
         }
