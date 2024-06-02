@@ -100,6 +100,12 @@ namespace MES
             {
                 DataContext = sp.GetService<DispatchProjectViewModel>()
             });
+
+            services.AddSingleton<AddMonitorViewModel>();
+            services.AddTransient(sp => new AddMonitorPage
+            {
+                DataContext = sp.GetService<AddMonitorViewModel>()
+            });
             #endregion
 
 

@@ -59,7 +59,8 @@ namespace MES.viewModels
         [RelayCommand]
         private void AddMonitor()
         {
-            MonitorInfos.Insert(0, RandomModelAssembler.RandomMonitorModel());
+            var page = App.Current.Services.GetService<AddMonitorPage>();
+            page!.Show();
         }
 
         private void InitializeMessenger()
@@ -82,6 +83,13 @@ namespace MES.viewModels
                         0,
                         new DispatcherModel($"将{m.Task!.TaskName}分配给{m.Task!.Name}生产", m.Task!.Time)
                     );
+                }
+            );
+            WeakReferenceMessenger.Default.Register<AddMonitorMessage>(
+                this,
+                (_, m) =>
+                {
+                    MonitorInfos.Insert(0, m.Monitor!);
                 }
             );
         }
